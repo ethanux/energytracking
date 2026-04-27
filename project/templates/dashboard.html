@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Dashboard</title>
+
+```
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f6f9;
+        margin: 0;
+        padding: 0;
+    }
+
+
+    .header {
+        background-color: #1f2937;
+        color: white;
+        padding: 15px 30px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .header h2 {
+        margin: 0;
+    }
+
+    .logout {
+        text-decoration: none;
+        color: white;
+        background-color: #ef4444;
+        padding: 8px 15px;
+        border-radius: 5px;
+    }
+
+    .logout:hover {
+        background-color: #dc2626;
+    }
+
+    
+    .container {
+        padding: 30px;
+    }
+
+   
+    .card {
+        background-color: white;
+        padding: 20px;
+        margin-bottom: 25px;
+        border-radius: 10px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .card h3 {
+        margin-top: 0;
+    }
+
+    
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    li {
+        padding: 10px;
+        border-bottom: 1px solid #eee;
+    }
+
+    li:last-child {
+        border-bottom: none;
+    }
+
+    
+    .graph-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 20px;
+    }
+
+    .graph {
+        background-color: #fafafa;
+        padding: 10px;
+        border-radius: 8px;
+        text-align: center;
+    }
+
+    .graph img {
+        max-width: 100%;
+        border-radius: 5px;
+    }
+</style>
+```
+
+</head>
+<body>
+
+```
+<div class="header">
+    <h2>📊 Energy Dashboard</h2>
+    <a href="/logout" class="logout">Logout</a>
+</div>
+
+<div class="container">
+
+    <div class="card">
+        <h3>Total Consumption (5 Years)</h3>
+        <ul>
+            {% for product, values in totals.items() %}
+                <li>
+                    <strong>{{ product }}</strong><br>
+                    ⚡ kWh: {{ values['kWh'] }} |
+                    🌍 CO2: {{ values['CO2'] }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+
+    <div class="card">
+        <h3>Graphs</h3>
+        <div class="graph-grid">
+            {% for graph in graphs %}
+                <div class="graph">
+                    <img src="{{ url_for('static', filename='graphs/' + graph) }}">
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</div>
+```
+
+</body>
+</html>
